@@ -6,9 +6,11 @@ const messageIds = {};
 export default function loginCommand(bot, msg, userTokens) {
   const chatId = msg.chat.id;
   loginStates[chatId] = { step: 'awaiting_login' };
+  messageIds[chatId] = []; // инициализация массива
+
   bot.sendMessage(chatId, 'Введите логин:')
     .then((message) => {
-      messageIds[chatId].botMessages = message.message_id;
+      messageIds[chatId].push(message.message_id);
     })
 }
 
@@ -25,7 +27,7 @@ export function handleLoginMessages(bot, msg, userTokens) {
     state.step = 'awaiting_password';
     bot.sendMessage(chatId, 'Введите пароль:')
       .then((message) => {
-        messageIds[chatId].botMessages = message.message_id;
+        messageIds[chatId].push(message.message_id);
       })
   } else if (state.step === 'awaiting_password') {
     const username = state.login;
@@ -35,11 +37,14 @@ export function handleLoginMessages(bot, msg, userTokens) {
     authenticateUser(username, password)
       .then(token => {
         userTokens[chatId] = token;
+
         if (messageIds[chatId]) {
           messageIds[chatId].forEach(id => {
             bot.deleteMessage(chatId, id).catch(() => { });
           });
-        };
+          delete messageIds[chatId];
+        }
+
         bot.sendMessage(chatId, 'Успешный вход!');
         delete loginStates[chatId];
       })
