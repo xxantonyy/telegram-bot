@@ -7,6 +7,8 @@ async function authenticateUser(login, password) {
     body: JSON.stringify({ login, password })
   });
 
+  console.log(response)
+
   if (!response.ok) {
     throw new Error('Login failed');
   }
