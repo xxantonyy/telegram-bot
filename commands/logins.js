@@ -1,4 +1,4 @@
-import { authenticateUser } from "app/services/authenticateUser";
+import { authenticateUser } from "../services/authenticateUser";
 
 const loginStates = {};
 
