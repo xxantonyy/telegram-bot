@@ -1,4 +1,4 @@
-import { getTodoList } from "../services/getTodoList";
+import { getTodoList } from "app/services/getTodoList";
 
 bot.onText(/\/todos/, async (bot, msg, userTokens) => {
   const chatId = msg.chat.id;
