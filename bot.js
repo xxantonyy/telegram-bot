@@ -24,4 +24,10 @@ bot.on('message', (msg) => {
   handleLoginMessages(bot, msg, userTokens);
 });
 
+// error handlers
+
+bot.on('polling_error', (error) => {
+  console.error('Polling error:', error);
+});
+
 export { bot, userTokens };
