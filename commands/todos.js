@@ -1,6 +1,6 @@
-import { getTodoList } from "../services/getTodoList.js";
+import { getTodoList } from '../services/getTodoList.js';
 
-bot.onText(/\/todos/, async (bot, msg, userTokens) => {
+export default async function todosCommand(bot, msg, userTokens) {
   const chatId = msg.chat.id;
   const token = userTokens[chatId];
 
@@ -16,4 +16,4 @@ bot.onText(/\/todos/, async (bot, msg, userTokens) => {
   } catch (e) {
     bot.sendMessage(chatId, 'Ошибка при получении задач');
   }
-});
+}
