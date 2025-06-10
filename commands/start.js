@@ -5,8 +5,8 @@ export default function startCommand(bot, msg) {
   const keyboard = {
     reply_markup: {
       keyboard: [
-        [{ text: '/start' }, { text: '/help' }],
-        [{ text: '/todo' }],
+        [{ text: 'Начать', callback_data: '/start' }, { text: 'Команды', callback_data: '/help' }],
+        [{ text: 'Тудушки', callback_data: '/todo' }],
       ],
       resize_keyboard: true,
       one_time_keyboard: false,
