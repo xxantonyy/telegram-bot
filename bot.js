@@ -1,6 +1,7 @@
 import TelegramBot from 'node-telegram-bot-api';
 import startCommand from './commands/start.js';
 import helpCommand from './commands/help.js';
+import todosCommand from './commands/todos.js';
 
 const userTokens = {};
 
@@ -15,6 +16,7 @@ const bot = new TelegramBot(token, { polling: true });
 
 bot.onText(/\/start/, (msg) => startCommand(bot, msg));
 bot.onText(/\/help/, (msg) => helpCommand(bot, msg));
+bot.onText(/\/todos/, (msg) => todosCommand(msg));
 
 
 export { bot, userTokens };
