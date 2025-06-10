@@ -30,8 +30,7 @@ export function handleLoginMessages(bot, msg, userTokens) {
         delete loginStates[chatId];
       })
       .catch((error) => {
-        bot.sendMessage(chatId, 'Ошибка входа. Попробуйте /login снова.');
-        bot.sendMessage(chatId, `${error}`);
+        bot.sendMessage(chatId, `Ошибка входа - ${error} Попробуйте /login снова.`);
         delete loginStates[chatId];
       });
   }
