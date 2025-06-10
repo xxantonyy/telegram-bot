@@ -1,6 +1,7 @@
 import TelegramBot from 'node-telegram-bot-api';
+import startCommand from './commands/start.js';
+import helpCommand from './commands/help.js';
 
-// Токен бота из @BotFather, передаём через переменную окружения
 const token = process.env.TELEGRAM_TOKEN;
 
 if (!token) {
@@ -8,13 +9,7 @@ if (!token) {
   process.exit(1);
 }
 
-// Создаем экземпляр бота с polling
 const bot = new TelegramBot(token, { polling: true });
 
-// Обрабатываем текстовые сообщения
-bot.on('message', (msg) => {
-  const chatId = msg.chat.id;
-
-  // Ответим простым текстом
-  bot.sendMessage(chatId, `Привет, ${msg.from.first_name || "друг"}! Ты написал: "${msg.text}"`);
-});
+bot.onText(/\/start/, (msg) => startCommand(bot, msg));
+bot.onText(/\/help/, (msg) => helpCommand(bot, msg));
