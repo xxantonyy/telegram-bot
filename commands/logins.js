@@ -23,8 +23,12 @@ export function handleLoginMessages(bot, msg, userTokens) {
 
   if (state.step === 'awaiting_login') {
     state.login = msg.text;
+
     bot.deleteMessage(chatId, msg.message_id).catch(() => { });
+    bot.deleteMessage(chatId, messageIds[chatId][0]).catch(() => { });
+
     state.step = 'awaiting_password';
+
     bot.sendMessage(chatId, 'Введите пароль:')
       .then((message) => {
         messageIds[chatId].push(message.message_id);
