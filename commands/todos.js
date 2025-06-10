@@ -1,6 +1,6 @@
-import { userTokens } from "../bot";
+import { getTodoList } from "../services/getTodoList";
 
-bot.onText(/\/todos/, async (bot,msg) => {
+bot.onText(/\/todos/, async (bot, msg, userTokens) => {
   const chatId = msg.chat.id;
   const token = userTokens[chatId];
 

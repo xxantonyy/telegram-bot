@@ -9,3 +9,5 @@ async function getTodoList(token) {
 
   return response.json(); // список задач
 }
+
+export { getTodoList };

@@ -14,9 +14,8 @@ if (!token) {
 
 const bot = new TelegramBot(token, { polling: true });
 
-bot.onText(/\/start/, (msg) => startCommand(bot, msg));
-bot.onText(/\/help/, (msg) => helpCommand(bot, msg));
-bot.onText(/\/todos/, (msg) => todosCommand(bot, msg));
-
+bot.onText(/\/start/, (msg) => startCommand(bot, msg, userTokens));
+bot.onText(/\/help/, (msg) => helpCommand(bot, msg, userTokens));
+bot.onText(/\/todos/, (msg) => todosCommand(bot, msg, userTokens));
 
 export { bot, userTokens };

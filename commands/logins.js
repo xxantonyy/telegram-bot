@@ -1,9 +1,8 @@
-import { userTokens } from "../bot";
 import { authenticateUser } from "../services/authenticateUser";
 
 const loginStates = {};
 
-bot.onText(/\/login/, (msg) => {
+bot.onText(/\/login/, (bot, msg, userTokens) => {
   const chatId = msg.chat.id;
   loginStates[chatId] = { step: 'awaiting_login' };
   bot.sendMessage(chatId, 'Введите логин:');
