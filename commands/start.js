@@ -6,7 +6,7 @@ export default function startCommand(bot, msg) {
     reply_markup: {
       keyboard: [
         [{ text: '/start' }, { text: '/help' }],
-        [{ text: '/todo' }],
+        [{ text: '/todos' }],
       ],
       resize_keyboard: true,
       one_time_keyboard: false,
