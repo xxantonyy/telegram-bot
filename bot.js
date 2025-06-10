@@ -2,7 +2,7 @@ import TelegramBot from 'node-telegram-bot-api';
 import startCommand from './commands/start.js';
 import helpCommand from './commands/help.js';
 import todosCommand from './commands/todos.js';
-import loginCommand from './commands/logins.js';
+import loginCommand, { handleLoginMessages } from './commands/logins.js';
 
 const userTokens = {};
 
