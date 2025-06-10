@@ -1,13 +1,11 @@
 import fetch from 'node-fetch';
 
-async function authenticateUser(login, password) {
+async function authenticateUser(username, password) {
   const response = await fetch('https://todosapi.homelabforton.ru/auth/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ login, password })
+    body: JSON.stringify({ username, password })
   });
-
-  console.log(response)
 
   if (!response.ok) {
     throw new Error('Login failed');
