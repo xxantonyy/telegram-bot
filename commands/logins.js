@@ -20,10 +20,10 @@ export function handleLoginMessages(bot, msg, userTokens) {
     state.step = 'awaiting_password';
     bot.sendMessage(chatId, 'Введите пароль:');
   } else if (state.step === 'awaiting_password') {
-    const login = state.login;
+    const username = state.login;
     const password = msg.text;
 
-    authenticateUser(login, password)
+    authenticateUser(username, password)
       .then(token => {
         userTokens[chatId] = token;
         bot.sendMessage(chatId, 'Успешный вход!');
