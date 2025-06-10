@@ -17,11 +17,13 @@ export function handleLoginMessages(bot, msg, userTokens) {
 
   if (state.step === 'awaiting_login') {
     state.login = msg.text;
+    bot.deleteMessage(chatId, msg.message_id).catch(() => {});
     state.step = 'awaiting_password';
     bot.sendMessage(chatId, 'Введите пароль:');
   } else if (state.step === 'awaiting_password') {
     const username = state.login;
     const password = msg.text;
+    bot.deleteMessage(chatId, msg.message_id).catch(() => {});
 
     authenticateUser(username, password)
       .then(token => {
