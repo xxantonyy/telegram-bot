@@ -1,6 +1,6 @@
 import { userTokens } from "../bot";
 
-bot.onText(/\/todos/, async (msg) => {
+bot.onText(/\/todos/, async (bot,msg) => {
   const chatId = msg.chat.id;
   const token = userTokens[chatId];
 
