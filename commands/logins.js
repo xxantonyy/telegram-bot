@@ -2,13 +2,14 @@ import { authenticateUser } from "../services/authenticateUser.js";
 
 const loginStates = {};
 
-bot.onText(/\/login/, (bot, msg, userTokens) => {
+export default function loginCommand(bot, msg, userTokens) {
   const chatId = msg.chat.id;
   loginStates[chatId] = { step: 'awaiting_login' };
   bot.sendMessage(chatId, 'Введите логин:');
-});
+}
 
-bot.on('message', async (msg) => {
+// Отдельная функция для обработки сообщений (пароля и логина)
+export function handleLoginMessages(bot, msg, userTokens) {
   const chatId = msg.chat.id;
   if (!loginStates[chatId]) return; // не в процессе логина
 
@@ -22,14 +23,15 @@ bot.on('message', async (msg) => {
     const login = state.login;
     const password = msg.text;
 
-    try {
-      const token = await authenticateUser(login, password); // функция вызова API
-      userTokens[chatId] = token;
-      bot.sendMessage(chatId, 'Успешный вход!');
-    } catch (e) {
-      bot.sendMessage(chatId, 'Ошибка входа. Попробуйте /login снова.');
-    }
-
-    delete loginStates[chatId]; // очищаем состояние
+    authenticateUser(login, password)
+      .then(token => {
+        userTokens[chatId] = token;
+        bot.sendMessage(chatId, 'Успешный вход!');
+        delete loginStates[chatId];
+      })
+      .catch(() => {
+        bot.sendMessage(chatId, 'Ошибка входа. Попробуйте /login снова.');
+        delete loginStates[chatId];
+      });
   }
-});
+}

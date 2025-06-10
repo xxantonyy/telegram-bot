@@ -20,4 +20,8 @@ bot.onText(/\/help/, (msg) => helpCommand(bot, msg, userTokens));
 bot.onText(/\/todos/, (msg) => todosCommand(bot, msg, userTokens));
 bot.onText(/\/login/, (msg) => loginCommand(bot, msg, userTokens));
 
+bot.on('message', (msg) => {
+  handleLoginMessages(bot, msg, userTokens);
+});
+
 export { bot, userTokens };
